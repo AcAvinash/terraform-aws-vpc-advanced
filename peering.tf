@@ -26,7 +26,7 @@ resource "aws_route" "default_route" {
 
 #add route in roboshop public route table
 resource "aws_route" "public_peering" {
-  count = var.is_peering_required && !var.is_default_vpc ? 1 : 0
+  count = var.is_peering_required ? 1 : 0
   route_table_id            = aws_route_table.public.id
   destination_cidr_block    = var.default_vpc_cidr
   # since we set count parameter, it is treated as list, even single element you should write list syntax
@@ -36,7 +36,7 @@ resource "aws_route" "public_peering" {
 
 
 resource "aws_route" "private_peering" {
-  count = var.is_peering_required && !var.is_default_vpc ? 1 : 0
+  count = var.is_peering_required ? 1 : 0
   route_table_id            = aws_route_table.private.id
   destination_cidr_block    = var.default_vpc_cidr
   # since we set count parameter, it is treated as list, even single element you should write list syntax
@@ -45,7 +45,7 @@ resource "aws_route" "private_peering" {
 }
 
 resource "aws_route" "database_peering" {
- count = var.is_peering_required && !var.is_default_vpc ? 1 : 0
+  count = var.is_peering_required ? 1 : 0
   route_table_id            = aws_route_table.database.id
   destination_cidr_block    = var.default_vpc_cidr
   # since we set count parameter, it is treated as list, even single element you should write list syntax

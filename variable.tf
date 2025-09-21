@@ -92,8 +92,3 @@ variable "default_route_table_id" {
 variable "default_vpc_cidr" {
   
 }
-
-variable "is_default_vpc" {
-
-  default     = false
-}
